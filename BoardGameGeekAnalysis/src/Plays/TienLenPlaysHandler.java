@@ -19,9 +19,9 @@ public class TienLenPlaysHandler extends DefaultHandler {
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		if (qName.equalsIgnoreCase("play")) {
-//			String playId = attributes.getValue("id");
-//			String date = attributes.getValue("date");
-//			System.out.println("Play ID : " + playId + " played on: " + date);
+			String playId = attributes.getValue("id");
+			String date = attributes.getValue("date");
+			System.out.println("Play ID : " + playId + " played on: " + date);
 	   	} else if (qName.equalsIgnoreCase("player")) {
 	   		String playerName = attributes.getValue("name");
 	   		if (playerName.equals("Kyzaa")) {
