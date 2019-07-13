@@ -1,6 +1,6 @@
 package Plays;
 
-public enum Games {
+public enum Game {
 
 	SEVEN_WONDERS (68448, "7 Wonders"),
 	TIEN_LEN (18103, "Tien Len"),
@@ -9,7 +9,7 @@ public enum Games {
 	private int gameID;
 	private String name;
 	
-	private Games(int gameID, String name) {
+	private Game(int gameID, String name) {
 		this.gameID = gameID;
 		this.name = name;
 	}
