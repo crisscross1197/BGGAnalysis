@@ -16,8 +16,14 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class PlaysHandler extends DefaultHandler {
 	
-	HashMap<String, Integer> plays = new HashMap<String, Integer>();
-	public HashMap<String, Integer> getPlays() {
+//	Map<String, Integer> plays = new HashMap<String, Integer>();
+	List<Play> plays = new ArrayList<>();
+	
+//	public Map<String, Integer> getPlays() {
+//		return plays;
+//	}
+
+	public List<Play> getPlays() {
 		return plays;
 	}
 
@@ -37,18 +43,19 @@ public class PlaysHandler extends DefaultHandler {
 			System.out.println("There are " + attributes.getValue("total") + " games recorded up to now!");
 		} else if (qName.equalsIgnoreCase("play")) {
 			play = new Play(attributes.getValue("id"), attributes.getValue("date"));
+			plays.add(play);
 	   	} else if (qName.equalsIgnoreCase("item")) {
 	   		play.setName(attributes.getValue("name"));
 	   		play.setGameId(attributes.getValue("objectid"));
 			
-	   		game = attributes.getValue("name");
-	   		if (plays.containsKey(game)) {
-	   			int i = plays.get(game);
-	   			i++;
-	   			plays.put(game, i);
-	   		} else {
-	   			plays.put(game, 1);
-	   		}
+//	   		game = attributes.getValue("name");
+//	   		if (plays.containsKey(game)) {
+//	   			int i = plays.get(game);
+//	   			i++;
+//	   			plays.put(game, i);
+//	   		} else {
+//	   			plays.put(game, 1);
+//	   		}
 	   	} else if (qName.equalsIgnoreCase("player")) {
 	   		Player player = new Player(attributes.getValue("name"), attributes.getValue("startposition"),
 	   				 attributes.getValue("color"), attributes.getValue("score"), attributes.getValue("win").equals("1")?true:false);
@@ -65,9 +72,9 @@ public class PlaysHandler extends DefaultHandler {
 	
 	@Override
 	public void endDocument() throws SAXException {
-		for (String s : sortByValue(plays).keySet()) {
-			System.out.println(s + ": " + plays.get(s));
-		}
+//		for (String s : sortByValue(plays).keySet()) {
+//			System.out.println(s + ": " + plays.get(s));
+//		}
 	}
 	
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
