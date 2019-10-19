@@ -7,6 +7,52 @@ public class Player {
 	private String name;
 	private ArrayList<Integer> positions;
 	
+	private String startPosition;
+	private String color;
+	private String score;
+	private Boolean win;
+	
+	public String getStartPosition() {
+		return startPosition;
+	}
+
+	public void setStartPosition(String startPosition) {
+		this.startPosition = startPosition;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public Boolean getWin() {
+		return win;
+	}
+
+	public void setWin(Boolean win) {
+		this.win = win;
+	}
+
+	public Player(String name, String startPosition, String color, String score, Boolean win) {
+		super();
+		this.name = name;
+		this.startPosition = startPosition;
+		this.color = color;
+		this.score = score;
+		this.win = win;
+	}
+
 	public Player(String name) {
 		this.name = name;
 		this.positions = new ArrayList<>();

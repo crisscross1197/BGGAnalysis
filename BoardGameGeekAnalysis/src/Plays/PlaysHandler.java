@@ -1,21 +1,14 @@
 package Plays;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -24,6 +17,10 @@ import org.xml.sax.helpers.DefaultHandler;
 public class PlaysHandler extends DefaultHandler {
 	
 	HashMap<String, Integer> plays = new HashMap<String, Integer>();
+	public HashMap<String, Integer> getPlays() {
+		return plays;
+	}
+
 	DateFormat format = new SimpleDateFormat("dd.mm.yyyy", Locale.GERMAN);
 	private String game;
 	private Play play;
@@ -53,8 +50,9 @@ public class PlaysHandler extends DefaultHandler {
 	   			plays.put(game, 1);
 	   		}
 	   	} else if (qName.equalsIgnoreCase("player")) {
-	   		Player player = new Player(attributes.getValue("name"));
-			play.addPlayers(player);
+	   		Player player = new Player(attributes.getValue("name"), attributes.getValue("startposition"),
+	   				 attributes.getValue("color"), attributes.getValue("score"), attributes.getValue("win").equals("1")?true:false);
+			play.addPlayer(player);
 		}
 	}
 

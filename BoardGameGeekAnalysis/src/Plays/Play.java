@@ -56,7 +56,7 @@ public class Play {
 		this.players = players;
 	}
 	
-	public void addPlayers(Player player) {
+	public void addPlayer(Player player) {
 		this.players.add(player);
 	}
 
