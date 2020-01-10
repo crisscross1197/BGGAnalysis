@@ -11,6 +11,8 @@ import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 
+import Database.DatabaseConnector;
+
 public class BoardgamePlays {
 	
 	private static String url = "https://api.geekdo.com/xmlapi2/plays?username=crisscross1197";
@@ -43,8 +45,22 @@ public class BoardgamePlays {
 		        	saxParser.parse(new InputSource(new URL(url).openStream()), playsHandler);
 		        }	
 			}
-	        List<Play> lovecraftPlays = new ArrayList<Play>();
-	        lovecraftPlays = playsHandler.getPlays();
+	        
+	        // init DB connection
+	        DatabaseConnector conn = new DatabaseConnector("//localhost/bgganalysis");
+	        if (conn.createTable("boardgames")) {
+	        	System.out.println("Table created succesfully!");
+	        } else {
+	        	System.out.println("Table creation failed");
+	        }
+	        
+	        List<Play> lovecraftPlays = playsHandler.getPlays();
+	        Play play1 = lovecraftPlays.get(1);
+	        if (Boolean.TRUE.equals(conn.insert("boardgames", "bgNr, bgName", "1, \"" + play1.getName() + "\""))) {
+	        	System.out.println("Data inserted!");
+	        } else {
+	        	return;
+	        }
 	        
 	        List<Player> kris = new ArrayList<>();
 	        List<Player> jon = new ArrayList<>();
